@@ -1,17 +1,31 @@
 <template>
   <div class="blog-item">
     <div class="blog-title-left">
-      <div v-if="!editing" @dblclick="editBlog(blog)" class="blog-title-label">{{ blog.title }}</div>
-      <input v-else class="blog-title-edit" type="text" v-model="blog.title" />
+      <div v-if="!editing" class="blog-title-label">{{ blog.title }}</div>
+      <input
+        v-else
+        class="blog-title-edit"
+        type="text"
+        v-model="blog.title"
+        @blur="doneEdit()"
+        @keyup.enter="doneEdit()"
+      />
 
-      <button @click="editBlog()">Edit me</button>
+      <button class="edit-me" @click="editBlog()">Edit me</button>
 
       <button @click="$emit('del-blog', blog.id)" class="del">x</button>
     </div>
 
     <div class="blog-body-left">
       <div v-if="!editing" class="blog-body-label">{{ blog.body }}</div>
-      <input v-else class="blog-body-edit" type="text" v-model="blog.body" />
+      <input
+        v-else
+        class="blog-body-edit"
+        type="text"
+        v-model="blog.body"
+        @blur="doneEdit()"
+        @keyup.enter="doneEdit()"
+      />
     </div>
   </div>
 </template>
@@ -28,6 +42,9 @@ export default {
   methods: {
     editBlog() {
       this.editing = !this.editing;
+    },
+    doneEdit() {
+      this.editing = false;
     },
   },
 };
@@ -69,5 +86,11 @@ export default {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
+}
+.edit-me {
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  padding: 5px;
 }
 </style>
