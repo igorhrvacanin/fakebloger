@@ -1,20 +1,8 @@
 <template>
   <div>
     <form @submit="addBlog">
-      <input
-        type="text"
-        name="title"
-        v-model="title"
-        placeholder="Add Title"
-        required
-      />
-      <input
-        type="text"
-        name="body"
-        v-model="body"
-        placeholder="Add Text to Blog"
-        required
-      />
+      <input type="text" name="title" v-model="title" placeholder="Add Title" required />
+      <input type="text" name="body" v-model="body" placeholder="Add Text to Blog" required />
       <input type="submit" value="Submit" class="btn" />
     </form>
   </div>

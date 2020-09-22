@@ -3,12 +3,7 @@
     <Header />
     <AddBlog v-on:add-blog="addBlog" />
     <form class="search">
-      <input
-        type="text"
-        v-model="search"
-        name="search"
-        placeholder="Search Blogs"
-      />
+      <input type="text" v-model="search" name="search" placeholder="Search Blogs" />
     </form>
 
     <Blogs v-bind:blogs="filteredBlogs" v-on:del-blog="deleteBlog" />
@@ -30,7 +25,12 @@ export default {
   },
   data() {
     return {
-      blogs: [],
+      blogs: [
+        {
+          title: "",
+          body: "",
+        },
+      ],
       search: "",
     };
   },
@@ -61,6 +61,7 @@ export default {
       .then((res) => (this.blogs = res.data))
       .catch((err) => console.log(err));
   },
+
   computed: {
     filteredBlogs: function fil() {
       return this.blogs.filter((blog) => {
