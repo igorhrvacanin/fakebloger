@@ -1,17 +1,17 @@
 <template>
   <div class="blog-item">
     <div class="blog-title-left">
-      <div v-if="!blog.editing" @dblclick="editBlog(blog)" class="blog-title-label">{{ blog.title }}</div>
-
+      <div v-if="!editing" @dblclick="editBlog(blog)" class="blog-title-label">{{ blog.title }}</div>
       <input v-else class="blog-title-edit" type="text" v-model="blog.title" />
-      <button @click="editBlog(blog)">Edit</button>
+
+      <button @click="editBlog()">Edit me</button>
 
       <button @click="$emit('del-blog', blog.id)" class="del">x</button>
     </div>
 
     <div class="blog-body-left">
-      <div class="blog-body-label">{{ blog.body }}</div>
-      <input class="blog-body-edit" type="text" v-model="blog.body" />
+      <div v-if="!editing" class="blog-body-label">{{ blog.body }}</div>
+      <input v-else class="blog-body-edit" type="text" v-model="blog.body" />
     </div>
   </div>
 </template>
@@ -22,16 +22,12 @@ export default {
   props: ["blog"],
   data() {
     return {
-      blogs: [
-        {
-          editing: false,
-        },
-      ],
+      editing: false,
     };
   },
   methods: {
-    editBlog(blog) {
-      blog.editing = true;
+    editBlog() {
+      this.editing = !this.editing;
     },
   },
 };

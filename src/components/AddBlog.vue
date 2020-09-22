@@ -23,6 +23,7 @@ export default {
       const newBlog = {
         title: this.title,
         body: this.body,
+        editing: false,
       };
       this.$emit("add-blog", newBlog);
       this.title = "";

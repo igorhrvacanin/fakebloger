@@ -29,6 +29,7 @@ export default {
         {
           title: "",
           body: "",
+          editing: false,
         },
       ],
       search: "",
