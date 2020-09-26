@@ -11,14 +11,16 @@
         @keyup.enter="doneEdit()"
       />
 
-      <button class="edit-me" @click="editBlog()">Edit me</button>
+      <button class="edit-me" @blur="doneEdit()" @click="editBlog()">
+        {{ button.text }}
+      </button>
 
       <button @click="$emit('del-blog', blog.id)" class="del">x</button>
     </div>
 
     <div class="blog-body-left">
       <div v-if="!editing" class="blog-body-label">{{ blog.body }}</div>
-      <input
+      <textarea
         v-else
         class="blog-body-edit"
         type="text"
@@ -34,17 +36,29 @@
 export default {
   name: "BlogItem",
   props: ["blog"],
+
   data() {
     return {
       editing: false,
+      button: {
+        text: "Edit Me",
+      },
     };
   },
+
   methods: {
     editBlog() {
       this.editing = !this.editing;
+      if (this.editing == true) {
+        this.button.text = "Submit";
+      } else {
+        this.button.text = "Edit Me";
+      }
     },
+
     doneEdit() {
       this.editing = false;
+      this.button.text = "Edit Me";
     },
   },
 };
@@ -56,9 +70,7 @@ export default {
   padding: 10px;
   border-bottom: 1px solid #ccc;
 }
-.blog-item :first-child {
-  font-size: 1.5rem;
-}
+
 .del {
   background: #555;
   color: white;
@@ -72,20 +84,29 @@ export default {
   display: flex;
   align-items: center;
 }
-.blog-title-label,
-.blog-body-label {
+.blog-title-label {
+  font-size: 1.5rem;
   padding: 10px;
   border: 1px solid white;
   margin-left: 12px;
 }
+.blog-body-label {
+  padding: 10px;
+  border: 1px solid white;
+  margin-left: 12px;
+  font-size: 1.1rem;
+}
 .blog-title-edit,
 .blog-body-edit {
-  font-size: 24px;
+  font-size: 15px;
   color: #2c3e50;
   margin-left: 12px;
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
+}
+.blog-body-edit {
+  height: 100px;
 }
 .edit-me {
   background-color: #2c3e50;
