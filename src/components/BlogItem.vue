@@ -7,11 +7,10 @@
         class="blog-title-edit"
         type="text"
         v-model="blog.title"
-        @blur="doneEdit()"
         @keyup.enter="doneEdit()"
       />
 
-      <button class="edit-me" @blur="doneEdit()" @click="editBlog()">
+      <button class="edit-me" @click="editBlog()">
         {{ button.text }}
       </button>
 
@@ -25,7 +24,6 @@
         class="blog-body-edit"
         type="text"
         v-model="blog.body"
-        @blur="doneEdit()"
         @keyup.enter="doneEdit()"
       />
     </div>
@@ -57,6 +55,7 @@ export default {
     },
 
     doneEdit() {
+      debugger; // eslint-disable-line no-debugger
       this.editing = false;
       this.button.text = "Edit Me";
     },
